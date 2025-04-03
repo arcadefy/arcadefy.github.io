@@ -5,11 +5,10 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 
   output: "export",
-  basePath: "/nextjs-github-pages",
   images: {
     unoptimized: true,
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
 };
 
 export default withMDX(nextConfig);
