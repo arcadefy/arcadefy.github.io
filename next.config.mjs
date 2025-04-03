@@ -1,5 +1,9 @@
+const withMDX = require('@next/mdx')()
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+
   output: "export",
   basePath: "/nextjs-github-pages",
   images: {
@@ -8,4 +12,4 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);
