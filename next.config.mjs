@@ -4,6 +4,12 @@ const withMDX = require('@next/mdx')()
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 
+
+  output: "export",
+
+
+  basePath: "/nextjs-github-pages",
+
   images: {
     unoptimized: true,
   },
