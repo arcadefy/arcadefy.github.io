@@ -26,7 +26,7 @@ const slugifyText = (text: string) =>
     slugify(text, { lower: true, strict: true });
 
 export default function PlayLayout({ children, game }: any) {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const relatedGames = getRelatedGames(game.id, 6);
     const url = config.siteURL;
@@ -60,7 +60,7 @@ export default function PlayLayout({ children, game }: any) {
                 <div className="container mx-auto px-4 py-8">
                     <div className="grid gap-8 md:grid-cols-3">
                         <div className="md:col-span-2">
-                            <div className="overflow-hidden rounded-lg bg-black relative md:aspect-video">
+                            <div className="overflow-hidden rounded-lg bg-black relative aspect-square md:aspect-video">
                                 {!isPlaying && (
                                     <>
                                         <div className="relative w-full h-full opacity-40">
