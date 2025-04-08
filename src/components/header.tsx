@@ -27,6 +27,8 @@ export default function Header() {
     }
 
     return (
+        <>
+        
         <header className="sticky top-0 z-50 w-full bg-cyan-50 shadow-sm">
             <div className="container mx-auto px-4">
                 <div className="flex h-16 items-center justify-between">
@@ -60,12 +62,7 @@ export default function Header() {
                         <Link href="/categories" className="text-sm font-medium hover:text-cyan-600 transition-colors">
                             Categories
                         </Link>
-                        <Link href="/popular" className="text-sm font-medium hover:text-cyan-600 transition-colors">
-                            Popular
-                        </Link>
-                        <Link href="/new" className="text-sm font-medium hover:text-cyan-600 transition-colors">
-                            New
-                        </Link>
+                        
                     </nav>
 
                     <div className="flex md:hidden">
@@ -127,23 +124,11 @@ export default function Header() {
                         >
                             Categories
                         </Link>
-                        <Link
-                            href="/popular"
-                            className="flex items-center space-x-2 text-lg font-medium"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Popular
-                        </Link>
-                        <Link
-                            href="/new"
-                            className="flex items-center space-x-2 text-lg font-medium"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            New
-                        </Link>
+                       
                     </nav>
                 </div>
             </div>
         </header>
+        </>
     )
 }

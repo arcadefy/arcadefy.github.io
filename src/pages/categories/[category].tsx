@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import config from '../../../config';
 import Gameitem from "@/components/GameItem";
+import CategoryTabs from "@/components/category-tabs";
 
 
 
@@ -59,8 +60,9 @@ const BrowsePage = ({ category, initialGames }: { category: string; initialGames
             />
 
             <div>
-                <div className="flex justify-center p-10 border-b-2">
-                    <h1 className="text-2xl capitalize">{category} Games</h1>
+                <div className="container mx-auto px-4 py-8">
+                    <h1 className="text-3xl capitalize text-center font-bold mb-8">{category} Games</h1>
+                    <CategoryTabs />
                 </div>
                 <div className="py-5">
                     <Gameitem data={displayedGames} />

@@ -1,7 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import slugify from 'slugify';
-
+import { cn } from '@/lib/utils'; // adjust the import based on where your `cn` function lives
+const slugifyText = (text: string) =>
+    slugify(text, {
+        lower: true,
+        strict: true,
+    });
 interface Game {
     id: string;
     title: string;
@@ -15,40 +21,42 @@ interface Game {
     height: string;
 }
 
-const slugifyText = (text: string) =>
-    slugify(text, {
-        lower: true,
-        strict: true,
-    });
+interface GameitemProps {
+    data: Game[];
+    featured?: boolean;
+    className?: string;
+}
 
-export default function Gameitem({ data }: { data: Game[] }) {
+export default function Gameitem({ data, featured = false, className = '' }: GameitemProps) {
     return (
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-5 p-4">
-            {data.map((game: Game) => {
-                const aspectRatio = game.width && game.height
-                    ? `aspect-[${game.width}/${game.height}]`
-                    : 'aspect-video';
+            {data.map((game) => (
+                <li key={game.id}>
+                    <Link
+                        href={`/play/${slugifyText(game.title)}`}
+                        className={cn(
+                            "group relative overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 shadow-md transition-all hover:shadow-lg",
+                            featured ? "col-span-2 row-span-2" : "",
+                            className,
+                        )}
+                    >
+                        <div className="aspect-square w-full overflow-hidden rounded-2xl">
+                            <Image
+                                src={game.thumb || "/placeholder.svg"}
+                                alt={game.title}
+                                width={featured ? 600 : 300}
+                                height={featured ? 600 : 300}
+                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                        </div>
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+                            <h3 className="text-lg font-bold text-white">{game.title}</h3>
+                            {game.category && <p className="text-sm text-cyan-200">{game.category}</p>}
+                        </div>
+                    </Link>
+                </li>
 
-                return (
-                    <li key={game.id} className="group bg-white dark:bg-neutral-900 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <Link href={`/play/${slugifyText(game.title)}`}>
-                            <div className="cursor-pointer overflow-hidden rounded-2xl">
-                                <div className={`w-full ${aspectRatio} bg-gray-200`}>
-                                    <img
-                                        loading="eager"
-                                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                        src={game.thumb}
-                                        alt={game.title}
-                                    />
-                                </div>
-                                <div className="p-3">
-                                    <h2 className="text-sm sm:text-base font-medium text-center truncate">{game.title}</h2>
-                                </div>
-                            </div>
-                        </Link>
-                    </li>
-                );
-            })}
+            ))}
         </ul>
     );
 }

@@ -2,6 +2,10 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import slugify from "slugify"; // Import slugify library
 import games from "@/data/games.json";
 import PlayLayout from "@/components/PlayLayout";
+import { NextSeo } from "next-seo";
+
+
+
 
 interface Game {
     id: string;
