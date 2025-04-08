@@ -1,8 +1,8 @@
 const config = {
-    siteTitle: "Terabox Downloader – Stream & Download Videos Fast and Free",
-    siteName: "TeraDown",
+    siteTitle: "Play Online Games Fast and Free",
+    siteName: "Arcadefy",
     siteDescription: "Use our free Terabox Downloader to download video or any file directly without ads, delays, or login. Secure, fast, and works on all devices. Try it now!",
-    siteURL: "https://teradownloader.xyz",
+    siteURL: "https://arcadefy.github.io",
     siteLogo: "/apple-touch-icon.png", // relative path to public folder
     siteAuthor: "Jayasurya Mailsamy",
     googleAnalyticsId: "G-7Y5BKDBBXK", // optional
