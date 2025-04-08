@@ -26,7 +26,7 @@ const slugifyText = (text: string) =>
     slugify(text, { lower: true, strict: true });
 
 export default function PlayLayout({ children, game }: any) {
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const relatedGames = getRelatedGames(game.id, 6);
     const url = config.siteURL;
