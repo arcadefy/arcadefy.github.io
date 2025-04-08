@@ -41,19 +41,7 @@ export default function Header() {
                             </Link>
                         </div>
 
-                        <form onSubmit={handleSearch} className="hidden md:flex relative w-full max-w-sm mx-4">
-                            <Input
-                                type="search"
-                                placeholder="Search games..."
-                                className="pr-10 bg-white"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            <Button type="submit" size="icon" variant="ghost" className="absolute right-0 top-0">
-                                <Search className="h-4 w-4" />
-                                <span className="sr-only">Search</span>
-                            </Button>
-                        </form>
+                      
 
                         <nav className="hidden md:flex items-center space-x-4">
                             <Link href="/" className="text-sm font-medium hover:text-cyan-600 transition-colors">
@@ -95,20 +83,7 @@ export default function Header() {
                     </div>
 
                     <div className="px-4 py-2">
-                        <form onSubmit={handleSearch} className="relative mb-6">
-                            <Input
-                                type="search"
-                                placeholder="Search games..."
-                                className="pr-10"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            <Button type="submit" size="icon" variant="ghost" className="absolute right-0 top-0">
-                                <Search className="h-4 w-4" />
-                                <span className="sr-only">Search</span>
-                            </Button>
-                        </form>
-
+                    
                         <nav className="flex flex-col space-y-4">
                             <Link
                                 href="/"
