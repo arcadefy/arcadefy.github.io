@@ -36,8 +36,8 @@ export default function SearchPage() {
                 ) : (
                     <>
                         <p className="mb-6">Found {filteredGames.length} results for "{query}"</p>
-                            <Gameitem data={filteredGames} />
-                        
+                        <Gameitem data={filteredGames} />
+
                     </>
                 )}
             </div>
