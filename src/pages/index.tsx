@@ -2,6 +2,7 @@
 import { GetStaticProps } from "next";
 import { getGameById, Game } from "@/lib/games";
 import PlayLayout from "@/components/PlayLayout";
+import config from "../../config";
 
 const Homepage = ({ game }: { game: Game }) => {
   if (!game) {
@@ -16,7 +17,7 @@ const Homepage = ({ game }: { game: Game }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const gameId = "31633"; // ✅ Change this to the actual ID of the game you want as homepage
+  const gameId = config.HomepageGameId; // ✅ Change this to the actual ID of the game you want as homepage
   const game = getGameById(gameId);
 
   if (!game) {
