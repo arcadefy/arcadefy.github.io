@@ -1,4 +1,8 @@
 import games from "@/data/games.json"
+import slugify from "slugify";
+
+const slugifyText = (text: string) =>
+    slugify(text, { lower: true, strict: true });
 
 export interface Game {
     id: string
@@ -6,13 +10,18 @@ export interface Game {
     thumb: string
     category: string
     description?: string
+    slug?: string // Optional since it's computed
+
   }
 
   export const getGameById = (id: string): Game | undefined => {
     return games.find((game) => game.id === id);
 };
   
-const gamesData: Game[] = games
+const gamesData: Game[] = games.map((game) => ({
+  ...game,
+  slug: slugifyText(game.title),
+}));
 
 export function getGames(category?: string, limit?: number): Game[] {
   let filteredGames = [...gamesData]

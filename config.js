@@ -17,7 +17,7 @@ const config = {
         { title: "DMCA", url: "/pages/dmca" },
         { title: "Cookies", url: "/pages/cookies" },
         { title: "Disclaimer", url: "/pages/disclaimer" },
-        { title: "Sitemap", url: "/pages/sitemap.xml" }
+        { title: "Sitemap", url: "/sitemap.xml" }
       ]
   };
   
