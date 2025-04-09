@@ -1,14 +1,11 @@
+import { useEffect, useState } from "react";
 import { GetStaticProps, GetStaticPaths } from "next";
 import slugify from "slugify";
 import games from "@/data/games.json";
-import { useState } from "react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import config from '../../../config';
 import Gameitem from "@/components/GameItem";
-import CategoryTabs from "@/components/category-tabs";
-
-
 
 interface Game {
     id: string;
@@ -29,7 +26,7 @@ const slugifyText = (text: string) =>
         strict: true,
     });
 
-const PAGE_SIZE = 18;
+const PAGE_SIZE = 25;
 
 const BrowsePage = ({ category, initialGames }: { category: string; initialGames: Game[] }) => {
     const [displayedGames, setDisplayedGames] = useState<Game[]>(initialGames.slice(0, PAGE_SIZE));
@@ -48,9 +45,26 @@ const BrowsePage = ({ category, initialGames }: { category: string; initialGames
             setHasMore(false);
         }
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!hasMore) return;
+
+            const scrollPosition = window.innerHeight + window.scrollY;
+            const bottomPosition = document.body.offsetHeight - 100;
+
+            if (scrollPosition >= bottomPosition) {
+                loadMoreGames();
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [hasMore, currentPage]);
+
     const router = useRouter();
-    const pathname = router.pathname
-    const url = config.siteURL; // Replace with your actual site URL from config
+    const url = config.siteURL;
+
     return (
         <>
             <NextSeo
@@ -60,22 +74,14 @@ const BrowsePage = ({ category, initialGames }: { category: string; initialGames
             />
 
             <div>
-                <div className="container mx-auto px-4 py-8">
-                    <h1 className="text-3xl capitalize text-center font-bold mb-8">{category} Games</h1>
-                    <CategoryTabs />
+                <div className="container mx-auto px-4 py-10">
+                    <h1 className="text-3xl capitalize text-center font-bold">{category} Games</h1>
                 </div>
-                <div className="py-5">
+                <div className="">
                     <Gameitem data={displayedGames} />
                 </div>
-
-
-
-
-                {hasMore && (
-                    <div className='flex justify-center p-10'>
-                        <button className='btn btn-wide btn-neutral' onClick={loadMoreGames}>Load More</button>
-                    </div>
-
+                {!hasMore && (
+                    <div className='text-center py-10 text-gray-400'>No more games to load</div>
                 )}
             </div>
         </>
@@ -93,14 +99,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const category = slugifyText(sluggedCategory);
     const filteredGames = games.filter((game: Game) => slugifyText(game.category) === category);
 
-    // Ensure filteredGames is not undefined and has games
     if (!filteredGames || filteredGames.length === 0) {
         return {
             notFound: true,
         };
     }
 
-    // Send all filtered games to the page, we handle pagination on the client side
     return {
         props: {
             category: sluggedCategory,

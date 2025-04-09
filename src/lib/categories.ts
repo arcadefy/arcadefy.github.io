@@ -5,10 +5,11 @@ export interface Category {
   id: string
   name: string
   slug: string
+  gamesCount: number
 }
 
 /**
- * Extracts unique categories from the games.json file
+ * Extracts unique categories from the games.json file and counts games in each
  */
 export function getCategories(): Category[] {
   const categoryMap = new Map<string, Category>()
@@ -19,7 +20,10 @@ export function getCategories(): Category[] {
     const slug = slugify(name, { lower: true })
 
     if (!categoryMap.has(id)) {
-      categoryMap.set(id, { id, name,slug })
+      categoryMap.set(id, { id, name, slug, gamesCount: 1 })
+    } else {
+      const category = categoryMap.get(id)!
+      category.gamesCount += 1
     }
   }
 

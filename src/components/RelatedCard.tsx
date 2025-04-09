@@ -29,13 +29,13 @@ interface GameitemProps {
 
 export default function RelatedCard({ data, featured = false, className = '' }: GameitemProps) {
     return (
-        <ul className="grid grid-cols-2 gap-3">
+        <ul className=" grid grid-cols-3 gap-3">
             {data.map((game) => (
-                <li key={game.id}>
+                <li className='border rounded-2xl' key={game.id}>
                     <Link
                         href={`/play/${slugifyText(game.title)}`}
                         className={cn(
-                            "group relative overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 shadow-md transition-all hover:shadow-lg",
+                            "group relative overflow-hidden rounded-2xl bg-white dark:bg-neutral-900 transition-all ",
                             featured ? "col-span-2 row-span-2" : "",
                             className,
                         )}
@@ -49,9 +49,8 @@ export default function RelatedCard({ data, featured = false, className = '' }: 
                                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 rounded-b-2xl">
+                        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 to-transparent p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <h3 className="text-lg font-bold text-white">{game.title}</h3>
-                            {game.category && <p className="text-sm text-cyan-200">{game.category}</p>}
                         </div>
                     </Link>
                 </li>

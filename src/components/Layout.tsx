@@ -4,6 +4,7 @@ import Footer from "@/components/footer";
 import Head from "next/head";
 import config from "../../config";
 import { Inter } from "next/font/google"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,8 +21,10 @@ export default function Layout({ children }: LayoutProps) {
 
             <html lang="en">
                 <body className={inter.className}>
+                    <GoogleAnalytics gaId={config.googleAnalyticsId} />
+
                     <Navbar />
-                    <main className="min-h-screen max-h-full bg-gradient-to-br from-cyan-100 to-cyan-200"> <div className="container mx-auto ">
+                    <main className="min-h-screen max-h-full bg-purple-100"> <div className="container mx-auto ">
                         {children}
                     </div></main>
                     <Footer />

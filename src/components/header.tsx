@@ -1,14 +1,15 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
-import { Search, Menu, X } from "lucide-react"
+import { Search, Menu, X, House, Gamepad } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
+import config from "../../config"
+import CategoryTabs from "./category-tabs"
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -28,82 +29,81 @@ export default function Header() {
 
     return (
         <>
-
-            <header className="sticky top-0 z-50 w-full bg-cyan-50 shadow-sm">
+            <header className="sticky  top-0 z-50 w-full bg-purple-900 text-secondary shadow-sm">
                 <div className="container mx-auto px-4">
                     <div className="flex h-16 items-center justify-between">
+                        {/* Left - Home Icon */}
                         <div className="flex items-center">
-                            <Link href="/" className="flex items-center space-x-2">
-                                <div className="relative h-10 w-10 overflow-hidden rounded-full bg-cyan-600">
-                                    <div className="flex h-full w-full items-center justify-center text-xl font-bold text-white">G</div>
-                                </div>
-                                <span className="hidden text-xl font-bold sm:inline-block">GameHub</span>
+
+                            <Link href="/" className="flex gap-2 items-center font-bold text-lg">
+                                <House size={24} />
+                                <span className="hidden sm:inline">Home</span>
                             </Link>
+
+
+
                         </div>
 
-                      
+                        {/* Center - Logo or Site Name */}
+                        <div className="flex justify-center items-center flex-1">
+                            {config.siteLogo ? (
+                                <Link href="/" >
+                                    <img
+                                        src={config.siteLogo}
+                                        alt={config.siteName}
+                                        className="h-7 object-contain"
+                                    />
+                                </Link>
+                            ) : (
+                                <span className="text-lg font-semibold">{config.siteName}</span>
+                            )}
+                        </div>
 
-                        <nav className="hidden md:flex items-center space-x-4">
-                            <Link href="/" className="text-sm font-medium hover:text-cyan-600 transition-colors">
-                                Home
-                            </Link>
-                            <Link href="/categories" className="text-sm font-medium hover:text-cyan-600 transition-colors">
-                                Categories
-                            </Link>
+                        {/* Right - Nav or Menu */}
+                        <div className="flex items-center gap-3">
+                            <nav className="hidden md:flex items-center space-x-4">
+                                <Link href="/categories" className="font-bold text-lg flex items-center gap-2">
+                                    <Gamepad size={28} /> Categories
+                                </Link>
+                            </nav>
 
-                        </nav>
-
-                        <div className="flex md:hidden">
-                            <button onClick={toggleMenu}>
-                                <Menu className="h-7 w-7" />
-                                <span className="sr-only">Toggle menu</span>
-                            </button>
+                            {/* Mobile Menu Button */}
+                            <div className="md:hidden">
+                                <button onClick={toggleMenu} aria-label="Toggle menu">
+                                    <Menu className="h-6 w-6" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Mobile menu */}
+                {/* Mobile Menu */}
                 <div
                     className={cn(
-                        "fixed inset-0 z-50 bg-white md:hidden transition-transform duration-300 ease-in-out",
-                        isMenuOpen ? "translate-x-0" : "translate-x-full",
+                        "fixed inset-0 z-50 bg-purple-900 md:hidden transition-transform duration-300 ease-in-out",
+                        isMenuOpen ? "translate-x-0" : "translate-x-full"
                     )}
                 >
                     <div className="flex h-16 items-center justify-between px-4">
-                        <Link href="/" className="flex items-center space-x-2">
-                            <div className="relative h-10 w-10 overflow-hidden rounded-full bg-cyan-600">
-                                <div className="flex h-full w-full items-center justify-center text-xl font-bold text-white">G</div>
-                            </div>
-                            <span className="text-xl font-bold">GameHub</span>
-                        </Link>
-                        <button  onClick={toggleMenu}>
-                            <X className="h-7 w-6" />
-                            <span className="sr-only">Close menu</span>
+                        <div></div>
+                        <button onClick={toggleMenu} aria-label="Close menu">
+                            <X className="h-8 w-8" />
                         </button>
                     </div>
-
-                    <div className="px-4 py-2">
-                    
-                        <nav className="flex flex-col space-y-4">
-                            <Link
-                                href="/"
-                                className="flex items-center space-x-2 text-lg font-medium"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
+                    <div className="py-5 flex justify-center items-center">
+                        <nav className="text-center grid justify-center gap-4">
+                            <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium">
                                 Home
                             </Link>
-                            <Link
-                                href="/categories"
-                                className="flex items-center space-x-2 text-lg font-medium"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
+                            <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium">
                                 Categories
                             </Link>
-
                         </nav>
                     </div>
                 </div>
             </header>
+
+            <CategoryTabs />
         </>
     )
 }

@@ -22,9 +22,9 @@ export default function CategoryTabs() {
 
     return (
         <>
-            <div className="">
+            <div className="border-b-2 grid justify-center border-b-purple-900">
                 <div className="overflow-x-auto py-2  pl-2 container mx-auto ">
-                    <div className="flex  space-x-2 justify-center whitespace-nowrap">
+                    <div className="flex  space-x-2  whitespace-nowrap">
                         {categories.map((category) => (
                             <a
                                 key={category.id}
@@ -32,7 +32,7 @@ export default function CategoryTabs() {
                                 className={cn(
                                     "flex items-center space-x-2 rounded-full px-4 py-2 text-sm font-medium transition-colors",
                                     activeCategory === category.id
-                                        ? "bg-cyan-600 text-white"
+                                        ? "bg-purple-600 text-white"
                                         : "bg-white text-gray-700 hover:bg-gray-100"
                                 )}
                             >
