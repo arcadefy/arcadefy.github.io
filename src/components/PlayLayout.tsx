@@ -29,7 +29,7 @@ const slugifyText = (text: string) =>
 export default function PlayLayout({ children, game }: any) {
     const [isPlaying, setIsPlaying] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement>(null);
-    const relatedGames = getRelatedGames(game.id, 6);
+    const relatedGames = getRelatedGames(game.id, 12);
     const url = config.siteURL;
 
     const enterFullscreen = () => {
