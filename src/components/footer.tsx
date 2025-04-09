@@ -16,7 +16,8 @@ export default function Footer({ variant = "default" }: FooterProps) {
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="flex items-center">
                         <div className="flex items-center gap-2">
-                            <span>{config.siteName}</span>
+                        <p className="text-sm ">© {new Date().getFullYear()} {config.siteName}. All rights reserved.</p>
+
                         </div>
                     </div>
                     <nav className="flex justify-center flex-wrap gap-6 mt-4 md:mt-0">
@@ -33,10 +34,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
 
                     </nav>
                 </div>
-                <div className="mt-8 pt-6 border-t text-center md:flex md:justify-between md:text-left">
-                    <p className="text-sm ">© {new Date().getFullYear()} {config.siteName}. All rights reserved.</p>
-                    <p className="text-sm t mt-2 md:mt-0">Coded with love by <a href="https://oksurya.com" target="_blank">Oksurya</a></p>
-                </div>
+               
             </div>
         </footer>
     )
