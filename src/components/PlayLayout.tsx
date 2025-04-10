@@ -94,21 +94,28 @@ export default function PlayLayout({ children, game }: any) {
                                             className="absolute inset-0 w-full h-full border-0 rounded-lg"
                                             allowFullScreen
                                         />
-                                        <div className="absolute top-2 right-2 flex gap-2 z-10">
-                                            <Button size="icon" variant="secondary" onClick={enterFullscreen}>
-                                                <Maximize className="w-4 h-4" />
-                                            </Button>
-                                            <Button size="icon" variant="secondary" onClick={reloadGame}>
-                                                <RotateCcw className="w-4 h-4" />
-                                            </Button>
-                                            <Button size="icon" variant="destructive" onClick={stopGame}>
-                                                <X className="w-4 h-4" />
-                                            </Button>
-                                        </div>
+
                                     </>
                                 )}
-                            </div>
 
+
+                            </div>
+                            {isPlaying && (
+                                <div className=" bg-white mt-4 rounded-lg flex justify-center gap-4 p-4 shadow-md">
+                                    <Button variant="secondary" onClick={enterFullscreen}>
+                                        <Maximize className="w-4 h-4 mr-2" />
+                                        Fullscreen
+                                    </Button>
+                                    <Button variant="secondary" onClick={reloadGame}>
+                                        <RotateCcw className="w-4 h-4 mr-2" />
+                                        Reload
+                                    </Button>
+                                    <Button variant="destructive" onClick={stopGame}>
+                                        <X className="w-4 h-4 mr-2" />
+                                        Exit
+                                    </Button>
+                                </div>
+                            )}
                             <div className="mt-6 rounded-lg bg-white p-6 shadow-md">
                                 <div className="flex items-center justify-between">
                                     <h1 className="text-3xl font-bold">{game.title}</h1>
