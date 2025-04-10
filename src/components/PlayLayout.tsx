@@ -68,7 +68,7 @@ export default function PlayLayout({ children, game }: any) {
                                             <img
                                                 src={game.thumb || "/placeholder.svg"}
                                                 alt={game.title}
-                                                className="object-cover w-full h-full"
+                                                className=" object-contain w-full h-full"
                                             />
                                         </div>
                                         <div className="absolute inset-0 flex items-center justify-center">
